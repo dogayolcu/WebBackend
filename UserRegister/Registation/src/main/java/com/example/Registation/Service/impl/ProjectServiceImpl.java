@@ -2,10 +2,18 @@ package com.example.Registation.Service.impl;
 
 import com.example.Registation.Dto.ProjectDTO;
 import com.example.Registation.Entity.Project;
+import com.example.Registation.Entity.User;
 import com.example.Registation.Repo.ProjectRepository;
+import com.example.Registation.Repo.UserRepository;
 import com.example.Registation.Service.ProjectService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -13,21 +21,29 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @Override
-    public String createProject(ProjectDTO projectDTO)
-    {
+    @Autowired
+    private UserRepository userRepository;
 
-        Project project = new Project(
-                projectDTO.getId(),
-                projectDTO.getName(),
-                projectDTO.getDescription(),
-                projectDTO.getStartDate(),
-                projectDTO.getEndDate(),
-                projectDTO.getStatus()
-        );
+    @Override
+    @Transactional
+    public String createProject(ProjectDTO projectDTO) {
+        Project project = new Project();
+        project.setName(projectDTO.getName());
+        project.setDescription(projectDTO.getDescription());
+        project.setStartDate(projectDTO.getStartDate());
+        project.setEndDate(projectDTO.getEndDate());
+        project.setStatus(projectDTO.getStatus());
+
+        if (projectDTO.getUserIds() != null && !projectDTO.getUserIds().isEmpty()) {
+            Set<User> users = projectDTO.getUserIds().stream()
+                    .map(userId -> userRepository.findById(userId).orElse(null))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+
+            project.setUsers(users);
+        }
+
         projectRepository.save(project);
         return project.getName();
     }
-
-
 }

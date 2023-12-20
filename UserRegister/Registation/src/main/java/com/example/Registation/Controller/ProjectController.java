@@ -20,9 +20,8 @@ public class ProjectController {
 
 
     @PostMapping(path = "/save")
-    public String saveProject(@RequestBody ProjectDTO projectDTO)
-    {
-        String id = String.valueOf(projectService.createProject(projectDTO));
-        return id;
+    public ResponseEntity<String> saveProject(@RequestBody ProjectDTO projectDTO) {
+        String projectName = projectService.createProject(projectDTO);
+        return ResponseEntity.ok(projectName);
     }
 }

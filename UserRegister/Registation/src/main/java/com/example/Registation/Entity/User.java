@@ -21,6 +21,14 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
     @Column(name = "email")
     private String email;
 
@@ -30,8 +38,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Task> tasks = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -103,23 +109,8 @@ public class User {
         this.password = password;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
 
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
 
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
-
-    // toString Metodu
     @Override
     public String toString() {
         return "User{" +
@@ -128,9 +119,7 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + "[PROTECTED]" + '\'' +
-                ", tasks=" + tasks +
-                ", projects=" + projects +
-                '}';
+                ", password='" + "[PROTECTED]" +
+        '}';
     }
 }

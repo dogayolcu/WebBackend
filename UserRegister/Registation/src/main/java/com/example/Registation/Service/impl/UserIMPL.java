@@ -7,6 +7,9 @@ import  com.example.Registation.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserIMPL implements UserService
 {
@@ -34,6 +37,16 @@ public class UserIMPL implements UserService
             return user;
         }
         return null;
+    }
+
+    @Override
+    public List<UserDTO> findAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    private UserDTO convertToDTO(User user) {
+        return new UserDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getUsername(), user.getPassword());
     }
 
 

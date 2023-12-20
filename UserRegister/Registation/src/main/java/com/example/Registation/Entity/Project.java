@@ -16,8 +16,18 @@ public class Project {
     @Column(name = "name")
     private String name;
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     @Column(name = "description")
     private String description;
+
+
 
     @Column(name = "startDate")
     private Date startDate;
@@ -28,11 +38,13 @@ public class Project {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Task> tasks = new HashSet<>();
-
-    @ManyToMany(mappedBy = "projects")
-    private Set<User> members = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "user_projects",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> users = new HashSet<>();
 
 
     public Project() {
@@ -47,6 +59,7 @@ public class Project {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+
 
     public Date getEndDate() {
         return endDate;
@@ -75,8 +88,6 @@ public class Project {
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", status='" + status + '\'' +
-                ", tasks=" + tasks +
-                ", members=" + members +
                 '}';
     }
 
@@ -114,19 +125,5 @@ public class Project {
         this.status = status;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
 
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public Set<User> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Set<User> members) {
-        this.members = members;
-    }
 }

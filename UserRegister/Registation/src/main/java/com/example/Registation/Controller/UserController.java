@@ -35,4 +35,9 @@ public class UserController {
         String id = userService.addUser(userDTO);
         return id;
     }
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.findAllUsers();
+        return ResponseEntity.ok(users);
+    }
 }

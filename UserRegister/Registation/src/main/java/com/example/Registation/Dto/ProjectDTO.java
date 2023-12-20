@@ -1,6 +1,8 @@
 package com.example.Registation.Dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProjectDTO {
     private Integer id;
@@ -9,6 +11,17 @@ public class ProjectDTO {
     private Date startDate;
     private Date endDate;
     private String status;
+
+    public Set<Integer> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(Set<Integer> userIds) {
+        this.userIds = userIds;
+    }
+
+    private Set<Integer> userIds = new HashSet<>();
+
 
 
     public Integer getId() { return id; }
