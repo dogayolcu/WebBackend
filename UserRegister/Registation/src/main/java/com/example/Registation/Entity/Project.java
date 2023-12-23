@@ -1,4 +1,6 @@
 package com.example.Registation.Entity;;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.example.Registation.Entity.User;
 
@@ -44,6 +46,7 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
+    @JsonBackReference
     private Set<User> users = new HashSet<>();
 
 

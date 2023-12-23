@@ -10,9 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,5 +43,30 @@ public class ProjectServiceImpl implements ProjectService {
 
         projectRepository.save(project);
         return project.getName();
+    }
+
+
+    @Override
+    public List<ProjectDTO> findProjectsByUserId(Integer userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return Collections.emptyList();
+        }
+
+        return user.getProjects().stream()
+                .map(this::convertToProjectDTO)
+                .collect(Collectors.toList());
+    }
+
+    private ProjectDTO convertToProjectDTO(Project project) {
+
+        ProjectDTO dto = new ProjectDTO();
+        dto.setId(project.getId());
+        dto.setName(project.getName());
+        dto.setDescription(project.getDescription());
+        dto.setStartDate(project.getStartDate());
+        dto.setEndDate(project.getEndDate());
+        dto.setStatus(project.getStatus());
+        return dto;
     }
 }

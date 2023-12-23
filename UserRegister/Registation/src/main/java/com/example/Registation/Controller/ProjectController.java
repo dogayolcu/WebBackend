@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/projects")
@@ -23,5 +25,13 @@ public class ProjectController {
     public ResponseEntity<String> saveProject(@RequestBody ProjectDTO projectDTO) {
         String projectName = projectService.createProject(projectDTO);
         return ResponseEntity.ok(projectName);
+    }
+
+
+
+    @GetMapping("/user/{userId}/projects")
+    public ResponseEntity<List<ProjectDTO>> getUserProjects(@PathVariable Integer userId) {
+        List<ProjectDTO> projects = projectService.findProjectsByUserId(userId);
+        return ResponseEntity.ok(projects);
     }
 }

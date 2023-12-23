@@ -3,6 +3,8 @@ package com.example.Registation.Entity;
 
 import com.example.Registation.Entity.Project;
 import com.example.Registation.Entity.Task;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -45,6 +47,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
+    @JsonManagedReference
     private Set<Project> projects = new HashSet<>();
 
     public User() {
