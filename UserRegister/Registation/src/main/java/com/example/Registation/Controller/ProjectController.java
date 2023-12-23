@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -33,5 +35,21 @@ public class ProjectController {
     public ResponseEntity<List<ProjectDTO>> getUserProjects(@PathVariable Integer userId) {
         List<ProjectDTO> projects = projectService.findProjectsByUserId(userId);
         return ResponseEntity.ok(projects);
+    }
+
+    @GetMapping("/{projectId}/members")
+    public ResponseEntity<Set<UserDTO>> getProjectMembers(@PathVariable Integer projectId) {
+        Set<UserDTO> members = projectService.findProjectMembersByProjectId(projectId);
+        return ResponseEntity.ok(members);
+    }
+
+    @PostMapping("/{projectId}/addMember")
+    public ResponseEntity<?> addMemberToProject(@PathVariable Integer projectId, @RequestBody Map<String, String> requestBody) {
+        try {
+            projectService.addMemberToProject(projectId, requestBody.get("username"));
+            return ResponseEntity.ok("Member added successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

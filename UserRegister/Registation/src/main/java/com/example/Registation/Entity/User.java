@@ -63,7 +63,7 @@ public class User {
         this.password = password;
     }
 
-    // Getter ve Setter metodları
+
     public Integer getId() {
         return id;
     }

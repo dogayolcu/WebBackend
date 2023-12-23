@@ -1,6 +1,7 @@
 package com.example.Registation.Service.impl;
 
 import com.example.Registation.Dto.ProjectDTO;
+import com.example.Registation.Dto.UserDTO;
 import com.example.Registation.Entity.Project;
 import com.example.Registation.Entity.User;
 import com.example.Registation.Repo.ProjectRepository;
@@ -69,4 +70,41 @@ public class ProjectServiceImpl implements ProjectService {
         dto.setStatus(project.getStatus());
         return dto;
     }
+
+    @Override
+    public Set<UserDTO> findProjectMembersByProjectId(Integer projectId) {
+        Optional<Project> projectOptional = projectRepository.findById(projectId);
+        if (!projectOptional.isPresent()) {
+            return Collections.emptySet();
+        }
+
+        Project project = projectOptional.get();
+        Set<User> members = project.getUsers();
+        return members.stream().map(this::convertToUserDTO).collect(Collectors.toSet());
+    }
+
+    private UserDTO convertToUserDTO(User user) {
+        return new UserDTO(
+                user.getId(),
+                user.getName(),
+                user.getSurname(),
+                user.getEmail(),
+                user.getUsername(),
+                user.getPassword()
+        );
+    }
+    @Override
+    @Transactional
+    public void addMemberToProject(Integer projectId, String username) throws Exception {
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new Exception("Project not found"));
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new Exception("User not found");
+        }
+
+        project.getUsers().add(user);
+        projectRepository.save(project);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.Registation.Controller;
 
 import com.example.Registation.Dto.UserDTO;
 import com.example.Registation.Entity.User;
+import com.example.Registation.Repo.UserRepository;
 import com.example.Registation.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO) {
@@ -40,4 +44,16 @@ public class UserController {
         List<UserDTO> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            UserDTO userDTO = new UserDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getUsername(), user.getPassword());
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 }
