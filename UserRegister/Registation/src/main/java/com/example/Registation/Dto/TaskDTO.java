@@ -60,5 +60,9 @@ public class TaskDTO {
     }
 
     private User assignee;
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> 7ea5a997b7b555453cca59e0c98e49ad8950afe7
