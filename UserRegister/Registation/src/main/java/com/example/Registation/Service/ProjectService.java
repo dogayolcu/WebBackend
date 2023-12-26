@@ -8,9 +8,7 @@ import java.util.Set;
 
 public interface ProjectService {
     String createProject(ProjectDTO projectDTO);
-
     List<ProjectDTO> findProjectsByUserId(Integer userId);
-
     Set<UserDTO> findProjectMembersByProjectId(Integer projectId);
     void addMemberToProject(Integer projectId, String username) throws Exception;
 

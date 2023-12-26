@@ -22,38 +22,6 @@ public class Task {
     @JoinColumn(name = "projectId")
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User assignee;
-
-    public Task() {
-        super();
-    }
-
-    public Task(Integer id, String name, String description, String status, Project project, User assignee) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.project = project;
-        this.assignee = assignee;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", project=" + project +
-                ", assignee=" + assignee +
-                '}';
-    }
-
-
     public Integer getId() {
         return id;
     }
@@ -100,5 +68,34 @@ public class Task {
 
     public void setAssignee(User assignee) {
         this.assignee = assignee;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User assignee;
+
+    public Task() {
+        super();
+    }
+
+    public Task(Integer id, String name, String description, String status, Project project, User assignee) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.project = project;
+        this.assignee = assignee;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", project=" + project +
+                ", assignee=" + assignee +
+                '}';
     }
 }
