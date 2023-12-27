@@ -1,15 +1,17 @@
 package com.example.Registation.Dto;
 
 import com.example.Registation.Entity.Project;
+import com.example.Registation.Entity.Task;
 import com.example.Registation.Entity.User;
 import jakarta.persistence.*;
 
 public class TaskDTO {
     private Integer id;
     private String name;
-    private String description;
-    private String status;
-    private Project project;
+    private Task.TaskStatus status;
+    private Integer assignedUserId;
+    private Integer projectId;
+    private Integer userId;
 
     public Integer getId() {
         return id;
@@ -27,42 +29,37 @@ public class TaskDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStatus() {
+    public Task.TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Task.TaskStatus status) {
         this.status = status;
     }
 
-    public Project getProject() {
-        return project;
+    public Integer getAssignedUserId() {
+        return assignedUserId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setAssignedUserId(Integer assignedUserId) {
+        this.assignedUserId = assignedUserId;
     }
 
-    public User getAssignee() {
-        return assignee;
+    public Integer getProjectId() {
+        return projectId;
     }
 
-    public void setAssignee(User assignee) {
-        this.assignee = assignee;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 
-    private User assignee;
-<<<<<<< HEAD
+    public Integer getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }
-=======
-}
->>>>>>> 7ea5a997b7b555453cca59e0c98e49ad8950afe7
+
+

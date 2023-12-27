@@ -1,16 +1,24 @@
 package com.example.Registation.Service;
 
-<<<<<<< HEAD
-=======
 import com.example.Registation.Dto.ProjectDTO;
->>>>>>> 7ea5a997b7b555453cca59e0c98e49ad8950afe7
+
 import com.example.Registation.Dto.TaskDTO;
+import com.example.Registation.Entity.Task;
 import jakarta.transaction.Transactional;
 
+import java.util.List;
+
 public interface TaskService {
-    String createTask(TaskDTO taskDTO);
-<<<<<<< HEAD
-    String updateTaskStatus(Integer taskId, String status);
-=======
->>>>>>> 7ea5a997b7b555453cca59e0c98e49ad8950afe7
+
+    TaskDTO createTask(TaskDTO taskDTO);
+
+    TaskDTO findTaskById(Integer taskId);
+
+    List<TaskDTO> findTasksByProjectId(Integer projectId);
+
+    void updateTaskStatus(Integer taskId, String newStatus);
+
+    void assignTaskToUser(Integer taskId, Integer userId);
+
+
 }
