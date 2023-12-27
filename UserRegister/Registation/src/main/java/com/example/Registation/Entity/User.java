@@ -40,6 +40,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "verification_code")
+    private String verificationCode;
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
 
     @ManyToMany
     @JoinTable(

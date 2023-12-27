@@ -9,4 +9,5 @@ public interface IUserService {
     String addUser(UserDTO userDTO);
     User loginUser(String username, String password);
     List<UserDTO> findAllUsers();
+
 }

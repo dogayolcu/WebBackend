@@ -1,6 +1,7 @@
 package com.example.Registation.Controller;
 
 import com.example.Registation.Dto.UserDTO;
+import com.example.Registation.EmailService;
 import com.example.Registation.Entity.User;
 import com.example.Registation.Repo.IUserRepository;
 import com.example.Registation.Service.impl.UserService;
@@ -20,9 +21,12 @@ public class UserController {
     private final UserService userService;
     private final IUserRepository userRepository;
 
-    public UserController(UserService userService, IUserRepository userRepository) {
+    private final EmailService emailService;
+
+    public UserController(UserService userService, IUserRepository userRepository, EmailService emailService) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     @PostMapping("/login")
@@ -36,11 +40,37 @@ public class UserController {
     }
 
     @PostMapping(path = "/save")
-    public String saveEmployee(@RequestBody UserDTO userDTO)
-    {
-        String id = userService.addUser(userDTO);
-        return id;
+    public ResponseEntity<?> saveEmployee(@RequestBody UserDTO userDTO) {
+        try {
+            String id = userService.addUser(userDTO);
+            boolean emailSent = emailService.sendSimpleEmail(userDTO.getMail(), "Hoş Geldiniz", "Kaydınız başarıyla tamamlandı!");
+            if (emailSent) {
+                return ResponseEntity.ok(id);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Email could not be sent.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Kullanıcı kaydedilirken bir hata oluştu.");
+        }
     }
+  /*  @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestParam String email) {
+        String verificationCode = userService.generateVerificationCode(email);
+        if (verificationCode != null) {
+            emailService.sendSimpleEmail(email, "Password Reset Code", "Your code: " + verificationCode);
+            return ResponseEntity.ok("Verification code sent");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestParam String email, @RequestParam String code, @RequestParam String newPassword) {
+        boolean reset = userService.resetPassword(email, code, newPassword);
+        if (reset) {
+            return ResponseEntity.ok("Password reset successful");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid code or email");
+    }*/
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.findAllUsers();

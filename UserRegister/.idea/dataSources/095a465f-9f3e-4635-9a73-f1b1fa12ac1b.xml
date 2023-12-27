@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>1050</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1066</IntrospectionStateNumber>
       <ServerVersion>16.1</ServerVersion>
       <StartupTime>1703602327</StartupTime>
       <TimeZones>true ACDT
@@ -808,7 +808,7 @@ false Zulu
 14697||10|C|G
 14697||-9223372036854775808|U|G
 14697||10|U|G</Grants>
-      <IntrospectionStateNumber>1050</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1066</IntrospectionStateNumber>
       <ObjectId>16481</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4236,8 +4236,8 @@ false Zulu
     <schema id="267" parent="4" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1050</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2023-12-27.21:07:42</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>1066</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2023-12-27.23:23:58</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4286,7 +4286,7 @@ false Zulu
     </table>
     <table id="274" parent="267" name="users">
       <ObjectId>16725</ObjectId>
-      <StateNumber>981</StateNumber>
+      <StateNumber>1064</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4498,7 +4498,13 @@ project_id</ColNames>
       <StateNumber>980</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="305" parent="274" name="users_pkey">
+    <column id="305" parent="274" name="verification_code">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>1064</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="306" parent="274" name="users_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16731</ObjectId>
@@ -4507,7 +4513,7 @@ project_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="306" parent="274" name="users_pkey">
+    <key id="307" parent="274" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16732</ObjectId>
       <Primary>1</Primary>
