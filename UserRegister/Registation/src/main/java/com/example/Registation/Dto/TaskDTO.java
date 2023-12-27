@@ -8,10 +8,18 @@ import jakarta.persistence.*;
 public class TaskDTO {
     private Integer id;
     private String name;
-    private Task.TaskStatus status;
+    private String status;
     private Integer assignedUserId;
     private Integer projectId;
     private Integer userId;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
@@ -29,13 +37,7 @@ public class TaskDTO {
         this.name = name;
     }
 
-    public Task.TaskStatus getStatus() {
-        return status;
-    }
 
-    public void setStatus(Task.TaskStatus status) {
-        this.status = status;
-    }
 
     public Integer getAssignedUserId() {
         return assignedUserId;

@@ -36,7 +36,8 @@ public class TaskServiceImpl implements TaskService {
 
         Task task = new Task();
         task.setName(taskDTO.getName());
-        task.setStatus(taskDTO.getStatus()); // Doğrudan enum kullanılıyor
+        task.setStatus(Task.TaskStatus.fromString(taskDTO.getStatus())); // String'den enum'a dönüşüm
+
 
         // projectId kontrolü
         if (taskDTO.getProjectId() != null) {
@@ -73,7 +74,7 @@ public class TaskServiceImpl implements TaskService {
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.setId(task.getId());
         taskDTO.setName(task.getName());
-        taskDTO.setStatus(task.getStatus());
+        taskDTO.setStatus(task.getStatus().toString()); // Enum'dan String'e dönüşüm
         if (task.getProject() != null) {
             taskDTO.setProjectId(task.getProject().getId());
         }
@@ -89,10 +90,11 @@ public class TaskServiceImpl implements TaskService {
     public void updateTaskStatus(Integer taskId, String newStatus) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        Task.TaskStatus statusEnum = Task.TaskStatus.fromString(newStatus);
+        Task.TaskStatus statusEnum = Task.TaskStatus.fromString(newStatus); // String'den enum'a dönüşüm
         task.setStatus(statusEnum);
         taskRepository.save(task);
     }
+
 
 
     @Override
