@@ -62,6 +62,20 @@ public class TaskDTO {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    public static TaskDTO fromEntity(Task task) {
+        TaskDTO dto = new TaskDTO();
+        dto.setId(task.getId());
+        dto.setName(task.getName());
+        dto.setStatus(task.getStatus().toString());
+        if (task.getProject() != null) {
+            dto.setProjectId(task.getProject().getId());
+        }
+        if (task.getAssignedUser() != null) {
+            dto.setAssignedUserId(task.getAssignedUser().getId());
+        }
+        return dto;
+    }
 }
 
 

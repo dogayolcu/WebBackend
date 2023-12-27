@@ -2,8 +2,8 @@ package com.example.Registation.Controller;
 
 import com.example.Registation.Dto.UserDTO;
 import com.example.Registation.Entity.User;
-import com.example.Registation.Repo.UserRepository;
-import com.example.Registation.Service.UserService;
+import com.example.Registation.Repo.IUserRepository;
+import com.example.Registation.Service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,13 @@ import java.util.Map;
 @RequestMapping("api/v1/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final IUserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    public UserController(UserService userService, IUserRepository userRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO) {

@@ -2,7 +2,7 @@ package com.example.Registation.Controller;
 
 import com.example.Registation.Dto.TaskDTO;
 import com.example.Registation.Entity.Task;
-import com.example.Registation.Service.TaskService;
+import com.example.Registation.Service.impl.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +15,11 @@ import java.util.Map;
 @RequestMapping("/api/v1/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @PostMapping
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {

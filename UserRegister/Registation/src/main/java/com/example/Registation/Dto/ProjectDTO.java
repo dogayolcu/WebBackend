@@ -1,5 +1,7 @@
 package com.example.Registation.Dto;
 
+import com.example.Registation.Entity.Project;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,4 +38,16 @@ public class ProjectDTO {
     public void setEndDate(Date endDate) { this.endDate = endDate; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public static ProjectDTO fromEntity(Project project) {
+
+        ProjectDTO dto = new ProjectDTO();
+        dto.setId(project.getId());
+        dto.setName(project.getName());
+        dto.setDescription(project.getDescription());
+        dto.setStartDate(project.getStartDate());
+        dto.setEndDate(project.getEndDate());
+        dto.setStatus(project.getStatus());
+        return dto;
+    }
 }

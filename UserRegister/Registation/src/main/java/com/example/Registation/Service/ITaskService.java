@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 
 import java.util.List;
 
-public interface TaskService {
+public interface ITaskService {
 
     TaskDTO createTask(TaskDTO taskDTO);
 

@@ -5,7 +5,7 @@ import com.example.Registation.Entity.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface IUserService {
     String addUser(UserDTO userDTO);
     User loginUser(String username, String password);
     List<UserDTO> findAllUsers();

@@ -2,7 +2,8 @@ package com.example.Registation.Controller;
 
 import com.example.Registation.Dto.ProjectDTO;
 import com.example.Registation.Dto.UserDTO;
-import com.example.Registation.Service.ProjectService;
+
+import com.example.Registation.Service.impl.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,11 @@ import java.util.Set;
 @RequestMapping("api/v1/projects")
 public class ProjectController {
 
-    @Autowired
-    private ProjectService projectService;
+    private final ProjectService projectService;
+
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @PostMapping(path = "/save")
     public ResponseEntity<String> saveProject(@RequestBody ProjectDTO projectDTO) {

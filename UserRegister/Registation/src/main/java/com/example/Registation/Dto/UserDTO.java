@@ -1,5 +1,7 @@
 package com.example.Registation.Dto;
 
+import com.example.Registation.Entity.User;
+
 public class UserDTO {
 
 
@@ -96,5 +98,13 @@ public class UserDTO {
         this.password = password;
     }
 
-
+    public static UserDTO fromEntity(User user) {
+        return new UserDTO(
+                user.getId(),
+                user.getName(),
+                user.getSurname(),
+                user.getEmail(),
+                user.getUsername(),
+                user.getPassword());
+    }
 }

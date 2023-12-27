@@ -4,24 +4,25 @@ import com.example.Registation.Dto.ProjectDTO;
 import com.example.Registation.Dto.UserDTO;
 import com.example.Registation.Entity.Project;
 import com.example.Registation.Entity.User;
-import com.example.Registation.Repo.ProjectRepository;
-import com.example.Registation.Repo.UserRepository;
-import com.example.Registation.Service.ProjectService;
+import com.example.Registation.Repo.IProjectRepository;
+import com.example.Registation.Repo.IUserRepository;
+import com.example.Registation.Service.IProjectService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class ProjectServiceImpl implements ProjectService {
+public class ProjectService implements IProjectService {
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final IProjectRepository projectRepository;
+    private final IUserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    public ProjectService(IProjectRepository projectRepository, IUserRepository userRepository) {
+        this.projectRepository = projectRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional
@@ -55,21 +56,11 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         return user.getProjects().stream()
-                .map(this::convertToProjectDTO)
+                .map(ProjectDTO::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    private ProjectDTO convertToProjectDTO(Project project) {
 
-        ProjectDTO dto = new ProjectDTO();
-        dto.setId(project.getId());
-        dto.setName(project.getName());
-        dto.setDescription(project.getDescription());
-        dto.setStartDate(project.getStartDate());
-        dto.setEndDate(project.getEndDate());
-        dto.setStatus(project.getStatus());
-        return dto;
-    }
 
     @Override
     public Set<UserDTO> findProjectMembersByProjectId(Integer projectId) {
@@ -77,22 +68,15 @@ public class ProjectServiceImpl implements ProjectService {
         if (!projectOptional.isPresent()) {
             return Collections.emptySet();
         }
-
         Project project = projectOptional.get();
         Set<User> members = project.getUsers();
-        return members.stream().map(this::convertToUserDTO).collect(Collectors.toSet());
+        return members.stream()
+                .map(UserDTO::fromEntity)
+                .collect(Collectors.toSet());
     }
 
-    private UserDTO convertToUserDTO(User user) {
-        return new UserDTO(
-                user.getId(),
-                user.getName(),
-                user.getSurname(),
-                user.getEmail(),
-                user.getUsername(),
-                user.getPassword()
-        );
-    }
+
+
     @Override
     @Transactional
     public void addMemberToProject(Integer projectId, String username) throws Exception {

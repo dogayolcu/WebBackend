@@ -4,10 +4,10 @@ import com.example.Registation.Dto.TaskDTO;
 import com.example.Registation.Entity.Project;
 import com.example.Registation.Entity.Task;
 import com.example.Registation.Entity.User;
-import com.example.Registation.Repo.ProjectRepository;
-import com.example.Registation.Repo.TaskRepository;
-import com.example.Registation.Repo.UserRepository;
-import com.example.Registation.Service.TaskService;
+import com.example.Registation.Repo.IProjectRepository;
+import com.example.Registation.Repo.ITaskRepository;
+import com.example.Registation.Repo.IUserRepository;
+import com.example.Registation.Service.ITaskService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TaskServiceImpl implements TaskService {
+public class TaskService implements ITaskService {
+    private final IProjectRepository projectRepository;
+    private final IUserRepository userRepository;
+    private final ITaskRepository taskRepository;
 
-    @Autowired
-    private TaskRepository taskRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ProjectRepository projectRepository;
+    public TaskService(IProjectRepository projectRepository, IUserRepository userRepository,ITaskRepository taskRepository) {
+        this.projectRepository = projectRepository;
+        this.userRepository = userRepository;
+        this.taskRepository=taskRepository;
+    }
 
     @Override
     @Transactional
@@ -36,17 +36,14 @@ public class TaskServiceImpl implements TaskService {
 
         Task task = new Task();
         task.setName(taskDTO.getName());
-        task.setStatus(Task.TaskStatus.fromString(taskDTO.getStatus())); // String'den enum'a dönüşüm
+        task.setStatus(Task.TaskStatus.fromString(taskDTO.getStatus()));
 
-
-        // projectId kontrolü
         if (taskDTO.getProjectId() != null) {
             Project project = projectRepository.findById(taskDTO.getProjectId())
                     .orElseThrow(() -> new RuntimeException("Project not found"));
             task.setProject(project);
         }
 
-        // assignedUserId kontrolü
         if (taskDTO.getAssignedUserId() != null) {
             User user = userRepository.findById(taskDTO.getAssignedUserId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
@@ -54,35 +51,26 @@ public class TaskServiceImpl implements TaskService {
         }
 
         Task savedTask = taskRepository.save(task);
-        return convertToTaskDTO(savedTask);
+        return TaskDTO.fromEntity(savedTask);
     }
+
 
     @Override
     public TaskDTO findTaskById(Integer taskId) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        return convertToTaskDTO(task);
+        return TaskDTO.fromEntity(task);
     }
+
 
     @Override
     public List<TaskDTO> findTasksByProjectId(Integer projectId) {
-        List<Task> tasks = taskRepository.findByProjectId(projectId);
-        return tasks.stream().map(this::convertToTaskDTO).collect(Collectors.toList());
+        return taskRepository.findByProjectId(projectId).stream()
+                .map(TaskDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    private TaskDTO convertToTaskDTO(Task task) {
-        TaskDTO taskDTO = new TaskDTO();
-        taskDTO.setId(task.getId());
-        taskDTO.setName(task.getName());
-        taskDTO.setStatus(task.getStatus().toString()); // Enum'dan String'e dönüşüm
-        if (task.getProject() != null) {
-            taskDTO.setProjectId(task.getProject().getId());
-        }
-        if (task.getAssignedUser() != null) {
-            taskDTO.setAssignedUserId(task.getAssignedUser().getId());
-        }
-        return taskDTO;
-    }
+
 
 
     @Override
@@ -90,7 +78,7 @@ public class TaskServiceImpl implements TaskService {
     public void updateTaskStatus(Integer taskId, String newStatus) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        Task.TaskStatus statusEnum = Task.TaskStatus.fromString(newStatus); // String'den enum'a dönüşüm
+        Task.TaskStatus statusEnum = Task.TaskStatus.fromString(newStatus);
         task.setStatus(statusEnum);
         taskRepository.save(task);
     }
