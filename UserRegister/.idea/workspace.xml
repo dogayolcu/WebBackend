@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5c2ddf5-373e-4857-8a82-b4606d73e317" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b/storage_v2/_src_/database/WebDB.sl75BA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b/storage_v2/_src_/database/WebDB.sl75BA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/ProjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/ProjectDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/TaskDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/TaskDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/IProjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/ITaskRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/IUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/IProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/ITaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/IUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/ProjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/TaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/UserIMPL.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +98,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703348029526</updated>
       <workItem from="1703348032227" duration="11769000" />
-      <workItem from="1703711186051" duration="2986000" />
+      <workItem from="1703711186051" duration="3844000" />
     </task>
     <servers />
   </component>
