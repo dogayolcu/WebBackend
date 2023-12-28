@@ -1,4 +1,4 @@
-package com.example.Registation;
+package com.example.Registation.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -42,13 +42,6 @@ public class ProjectController {
         return ResponseEntity.ok(members);
     }
 
-    @PostMapping("/{projectId}/addMember")
-    public ResponseEntity<?> addMemberToProject(@PathVariable Integer projectId, @RequestBody Map<String, String> requestBody) {
-        try {
-            projectService.addMemberToProject(projectId, requestBody.get("username"));
-            return ResponseEntity.ok("Member added successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
+
+
 }

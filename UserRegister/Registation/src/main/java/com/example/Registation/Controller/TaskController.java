@@ -59,7 +59,11 @@ public class TaskController {
         taskService.assignTaskToUser(taskId, assignData.get("userId"));
         return ResponseEntity.ok().build();
     }
-
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TaskDTO>> getTasksByAssignedUser(@PathVariable Integer userId) {
+        List<TaskDTO> tasks = taskService.findTasksByAssignedUserId(userId);
+        return ResponseEntity.ok(tasks);
+    }
 
 }
 

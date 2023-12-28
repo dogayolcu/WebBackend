@@ -1,10 +1,11 @@
 package com.example.Registation.Controller;
 
 import com.example.Registation.Dto.UserDTO;
-import com.example.Registation.EmailService;
+import com.example.Registation.Service.impl.EmailService;
 import com.example.Registation.Entity.User;
 import com.example.Registation.Repo.IUserRepository;
 import com.example.Registation.Service.impl.UserService;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class UserController {
     public ResponseEntity<?> saveEmployee(@RequestBody UserDTO userDTO) {
         try {
             String id = userService.addUser(userDTO);
-            boolean emailSent = emailService.sendSimpleEmail(userDTO.getMail(), "Hoş Geldiniz", "Kaydınız başarıyla tamamlandı!");
+            boolean emailSent = emailService.sendSimpleEmail(userDTO.getMail(), "Welcome", "Your registration has been completed successfully!");
             if (emailSent) {
                 return ResponseEntity.ok(id);
             } else {
@@ -53,24 +54,47 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Kullanıcı kaydedilirken bir hata oluştu.");
         }
     }
-  /*  @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestParam String email) {
-        String verificationCode = userService.generateVerificationCode(email);
-        if (verificationCode != null) {
-            emailService.sendSimpleEmail(email, "Password Reset Code", "Your code: " + verificationCode);
-            return ResponseEntity.ok("Verification code sent");
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> payload) {
+        String userEmail = payload.get("email");
+        User user = userRepository.findByEmail(userEmail);
+        if (user != null) {
+            String verificationCode = userService.generateVerificationCode(userEmail);
+            emailService.sendSimpleEmail(userEmail, "Password Reset", "Your verification code: " + verificationCode);
+            return ResponseEntity.ok("Password reset instructions have been sent to your email.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found");
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestParam String email, @RequestParam String code, @RequestParam String newPassword) {
-        boolean reset = userService.resetPassword(email, code, newPassword);
-        if (reset) {
-            return ResponseEntity.ok("Password reset successful");
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        String verificationCode = payload.get("verificationCode");
+        String newPassword = payload.get("newPassword");
+        if (email == null || verificationCode == null || newPassword == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing fields in request.");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid code or email");
-    }*/
+
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+
+        if (!user.getVerificationCode().equals(verificationCode)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification code.");
+        }
+
+        user.setPassword(newPassword);
+        user.setVerificationCode(null);
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Password has been successfully reset.");
+    }
+
+
+
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.findAllUsers();

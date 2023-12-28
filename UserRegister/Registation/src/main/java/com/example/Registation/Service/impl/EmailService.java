@@ -1,15 +1,19 @@
-package com.example.Registation;
+package com.example.Registation.Service.impl;
 
+import com.example.Registation.Service.IEmailService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailService {
+public class EmailService implements IEmailService {
+    private final JavaMailSender mailSender;
 
-    @Autowired
-    private JavaMailSender mailSender;
+    public EmailService (JavaMailSender mailSender)
+    {
+        this.mailSender=mailSender;
+    }
 
     public boolean sendSimpleEmail(String to, String subject, String content) {
         try {
@@ -21,7 +25,7 @@ public class EmailService {
             mailSender.send(message);
             return true;
         } catch (Exception e) {
-            // Log the exception details
+
             return false;
         }
     }

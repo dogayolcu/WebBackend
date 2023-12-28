@@ -95,6 +95,11 @@ public class TaskService implements ITaskService {
         task.setAssignedUser(user);
         taskRepository.save(task);
     }
-
+    @Override
+    public List<TaskDTO> findTasksByAssignedUserId(Integer userId) {
+        return taskRepository.findByAssignedUserId(userId).stream()
+                .map(TaskDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
 
 }

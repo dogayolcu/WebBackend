@@ -50,12 +50,14 @@ public class UserService implements IUserService {
                 .collect(Collectors.toList());
     }
 
+
+
     public String generateVerificationCode(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-        String verificationCode = generateRandomCode();
+        String verificationCode = String.valueOf(new Random().nextInt(899999) + 100000);
         user.setVerificationCode(verificationCode);
         userRepository.save(user);
         return verificationCode;
@@ -63,20 +65,16 @@ public class UserService implements IUserService {
 
     public boolean resetPassword(String email, String verificationCode, String newPassword) {
         User user = userRepository.findByEmail(email);
-        if (user == null || !user.getVerificationCode().equals(verificationCode)) {
-            return false;
+        if (user != null && verificationCode.equals(user.getVerificationCode())) {
+            user.setPassword(newPassword);
+            user.setVerificationCode(null);
+            userRepository.save(user);
+            return true;
         }
-        user.setPassword(newPassword);
-        user.setVerificationCode(null);
-        userRepository.save(user);
-        return true;
+        return false;
     }
 
-    private String generateRandomCode() {
-        Random random = new Random();
-        int code = 100000 + random.nextInt(900000);
-        return String.valueOf(code);
-    }
+
 
 
 

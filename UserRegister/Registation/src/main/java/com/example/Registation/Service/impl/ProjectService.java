@@ -90,5 +90,18 @@ public class ProjectService implements IProjectService {
         project.getUsers().add(user);
         projectRepository.save(project);
     }
+    @Transactional
+    public void removeMemberFromProject(Integer projectId, String username) throws Exception {
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new Exception("Project not found"));
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new Exception("User not found");
+        }
+
+        project.getUsers().remove(user);
+        projectRepository.save(project);
+    }
+
 
 }

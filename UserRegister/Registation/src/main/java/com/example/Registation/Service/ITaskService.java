@@ -20,5 +20,7 @@ public interface ITaskService {
 
     void assignTaskToUser(Integer taskId, Integer userId);
 
+    List<TaskDTO> findTasksByAssignedUserId(Integer userId);
+
 
 }
