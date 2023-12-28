@@ -63,16 +63,7 @@ public class UserService implements IUserService {
         return verificationCode;
     }
 
-    public boolean resetPassword(String email, String verificationCode, String newPassword) {
-        User user = userRepository.findByEmail(email);
-        if (user != null && verificationCode.equals(user.getVerificationCode())) {
-            user.setPassword(newPassword);
-            user.setVerificationCode(null);
-            userRepository.save(user);
-            return true;
-        }
-        return false;
-    }
+
 
 
 

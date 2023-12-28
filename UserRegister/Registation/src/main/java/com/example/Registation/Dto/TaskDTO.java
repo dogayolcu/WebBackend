@@ -13,6 +13,15 @@ public class TaskDTO {
     private Integer projectId;
     private Integer userId;
 
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    private String projectName;
     public String getStatus() {
         return status;
     }

@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5c2ddf5-373e-4857-8a82-b4606d73e317" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/IEmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b/storage_v2/_src_/database/WebDB.sl75BA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/095a465f-9f3e-4635-9a73-f1b1fa12ac1b/storage_v2/_src_/database/WebDB.sl75BA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/TaskDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Dto/TaskDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/ITaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Repo/ITaskRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/TaskService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Service/impl/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registation/src/main/java/com/example/Registation/Config/WebConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703348029526</updated>
       <workItem from="1703348032227" duration="11769000" />
-      <workItem from="1703711186051" duration="15586000" />
+      <workItem from="1703711186051" duration="17616000" />
     </task>
     <servers />
   </component>
