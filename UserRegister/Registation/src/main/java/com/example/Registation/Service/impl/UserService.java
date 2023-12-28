@@ -19,10 +19,39 @@ public class UserService implements IUserService {
     {
         this.userRepository=userRepository;
     }
+    public boolean isValidPassword(String password) {
+        int minLength = 8;
+        int maxLength = 20;
+
+        if (password.length() < minLength || password.length() > maxLength) {
+            return false;
+        }
+
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasDigit = false;
+        boolean hasSpecial = false;
+
+        for (char ch : password.toCharArray()) {
+            if (Character.isUpperCase(ch)) hasUpper = true;
+            else if (Character.isLowerCase(ch)) hasLower = true;
+            else if (Character.isDigit(ch)) hasDigit = true;
+            else hasSpecial = true;
+
+            if (hasUpper && hasLower && hasDigit && hasSpecial) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public String addUser(UserDTO userDTO)
     {
-
+        if (!isValidPassword(userDTO.getPassword())) {
+            throw new IllegalArgumentException("Invalid password");
+        }
         User user = new User(
                 userDTO.getId(),
                 userDTO.getName(),

@@ -72,6 +72,7 @@ public class UserController {
         String email = payload.get("email");
         String verificationCode = payload.get("verificationCode");
         String newPassword = payload.get("newPassword");
+
         if (email == null || verificationCode == null || newPassword == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing fields in request.");
         }
@@ -83,6 +84,10 @@ public class UserController {
 
         if (!user.getVerificationCode().equals(verificationCode)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification code.");
+        }
+
+        if (!userService.isValidPassword(newPassword)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid password. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
         }
 
         user.setPassword(newPassword);
